@@ -59,9 +59,9 @@ public class Computable {
 		double pointPlus = point + 1;
 		double pointMinus = point - 1;
 		
-		double pY = (derivative[1] * point) + derivative[0];
-		double pPY = (derivative[1] * pointPlus) + derivative[0];
-		double pMY = (derivative[1] * pointMinus) + derivative[0];
+		double pY = (derivative[0] * point) + derivative[1];
+		double pPY = (derivative[0] * pointPlus) + derivative[1];
+		double pMY = (derivative[0] * pointMinus) + derivative[1];
 		
 		if(pPY > 0 && 0 > pMY) return -1;
 		else if (pMY > 0 && 0 > pPY) return 1;
@@ -76,7 +76,7 @@ public class Computable {
 	
 	public double compute(double xVal)
 	{
-		double pY = (coeffecients[2] * Math.pow(xVal, 2)) + (coeffecients[1] * xVal) + coeffecients[0];
+		double pY = (coeffecients[0] * Math.pow(xVal, 2)) + (coeffecients[1] * xVal) + coeffecients[2];
 		return pY;
 	}
 	

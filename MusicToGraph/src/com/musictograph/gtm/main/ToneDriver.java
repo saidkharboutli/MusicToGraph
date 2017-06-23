@@ -16,12 +16,16 @@ public class ToneDriver {
 //	        StdAudio.play(a);
 //		}
 		
-		double dub[] = {3, 0, 6};
+		double dub[] = {2, 2, 6};
 		Computable computable = new Computable(dub);
-		for(int x = -100; x  <= 100; x++)
+		for(double x = -100; x <= 100; x+=.10)
 		{
-			double info[] = Tone.tone(computable.compute(x), .05);
-			StdAudio.play(info);
+			if(computable.compute(x) <= 700 && computable.compute(x) >= 150)
+			{
+				double info[] = Tone.tone(computable.compute(x), .10);
+				StdAudio.play(info);
+				//System.out.println("" + x + ": " + computable.compute(x));
+			}
 		}
 	}
 }
