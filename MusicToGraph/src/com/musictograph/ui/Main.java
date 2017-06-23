@@ -19,6 +19,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import java.awt.Toolkit;
 
 public class Main extends JFrame {
 
@@ -45,6 +46,7 @@ public class Main extends JFrame {
 	 * Create the frame.
 	 */
 	public Main() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Main.class.getResource("/logo.png")));
 		setTitle("Music <-> Graph");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 390);
@@ -63,6 +65,7 @@ public class Main extends JFrame {
 		contentPane.add(welcomeText);
 		
 		byText = new JTextField();
+		byText.setEditable(false);
 		byText.setBackground(SystemColor.menu);
 		byText.setFont(new Font("DialogInput", Font.PLAIN, 14));
 		byText.setText("By Sa'id Kharboutli and Thomas Han");

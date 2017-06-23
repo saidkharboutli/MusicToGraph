@@ -12,6 +12,7 @@ import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JTextPane;
 import java.awt.SystemColor;
+import java.awt.Toolkit;
 
 public class MusicToGraph extends JFrame {
 
@@ -26,7 +27,8 @@ public class MusicToGraph extends JFrame {
 	 * Create the frame.
 	 */
 	public MusicToGraph() {
-		setTitle("Music <-> Graph");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(MusicToGraph.class.getResource("/logo.png")));
+		setTitle("Music --> Graph");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 150);
 		contentPane = new JPanel();
@@ -49,6 +51,7 @@ public class MusicToGraph extends JFrame {
 		contentPane.add(btnLoad);
 		
 		JTextPane txtpnThisWillConvert = new JTextPane();
+		txtpnThisWillConvert.setEditable(false);
 		txtpnThisWillConvert.setBackground(SystemColor.menu);
 		txtpnThisWillConvert.setFont(new Font("DialogInput", Font.PLAIN, 11));
 		txtpnThisWillConvert.setText("This will convert your audio files into a graph! Enter the file path below:");
