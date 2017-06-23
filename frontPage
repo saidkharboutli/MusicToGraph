@@ -1,0 +1,7 @@
+<!DOCTYPE html>
+<html> 
+<body>
+APPLET ARCHIVE="yourfile.jar" CODE="yourApplet.class" WIDTH=400 HEIGHT=200>
+ </APPLET>
+</body>
+</html>
