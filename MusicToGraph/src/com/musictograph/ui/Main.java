@@ -20,6 +20,8 @@ import javax.swing.JLabel;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Main extends JFrame {
 
@@ -76,14 +78,35 @@ public class Main extends JFrame {
 		JButton graphToMusicButton = new JButton("Graph -> Music");
 		graphToMusicButton.setBounds(10, 291, 150, 23);
 		contentPane.add(graphToMusicButton);
+		graphToMusicButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				new MusicToGraph().setVisible(true);
+			}
+		});
 		
 		JButton musicToGraphButton = new JButton("Music -> Graph");
 		musicToGraphButton.setBounds(424, 291, 150, 23);
 		contentPane.add(musicToGraphButton);
+		musicToGraphButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				new GraphToMusic().setVisible(true);
+			}
+		});
 		
 		JButton imFeelingLuckyButton = new JButton("I'm Feeling Lucky");
 		imFeelingLuckyButton.setBounds(216, 318, 150, 23);
 		contentPane.add(imFeelingLuckyButton);
+		int rand = (int) Math.random();
+		if (rand == 1) 
+		{
+			setVisible(false);
+			new GraphToMusic().setVisible(true);;
+		} else if(rand == 0) {
+			setVisible(false);
+			new MusicToGraph().setVisible(true);
+		}
 		
 		JLabel imageLabel = new JLabel("");
 		imageLabel.setIcon(new ImageIcon(new ImageIcon(Main.class.getResource("/logo.png")).getImage().getScaledInstance(250, 175, Image.SCALE_DEFAULT)));
