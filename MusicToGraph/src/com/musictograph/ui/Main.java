@@ -56,7 +56,7 @@ public class Main extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JTextPane welcomeText = new JTextPane();
 		welcomeText.setToolTipText("Genesis API");
 		welcomeText.setEditable(false);
@@ -65,7 +65,7 @@ public class Main extends JFrame {
 		welcomeText.setFont(new Font("DialogInput", Font.PLAIN, 28));
 		welcomeText.setBounds(62, 11, 457, 54);
 		contentPane.add(welcomeText);
-		
+
 		byText = new JTextField();
 		byText.setEditable(false);
 		byText.setBackground(SystemColor.menu);
@@ -74,42 +74,49 @@ public class Main extends JFrame {
 		byText.setBounds(159, 76, 281, 20);
 		contentPane.add(byText);
 		byText.setColumns(10);
-		
+
 		JButton graphToMusicButton = new JButton("Graph -> Music");
 		graphToMusicButton.setBounds(10, 291, 150, 23);
 		contentPane.add(graphToMusicButton);
 		graphToMusicButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				new MusicToGraph().setVisible(true);
+				new GraphToMusic().setVisible(true);
+				dispose();
 			}
 		});
-		
+
 		JButton musicToGraphButton = new JButton("Music -> Graph");
 		musicToGraphButton.setBounds(424, 291, 150, 23);
 		contentPane.add(musicToGraphButton);
 		musicToGraphButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				new GraphToMusic().setVisible(true);
+				new MusicToGraph().setVisible(true);
+				dispose();
 			}
 		});
-		
+
 		JButton imFeelingLuckyButton = new JButton("I'm Feeling Lucky");
 		imFeelingLuckyButton.setBounds(216, 318, 150, 23);
 		contentPane.add(imFeelingLuckyButton);
-		int rand = (int) Math.random();
-		if (rand == 1) 
-		{
-			setVisible(false);
-			new GraphToMusic().setVisible(true);;
-		} else if(rand == 0) {
-			setVisible(false);
-			new MusicToGraph().setVisible(true);
-		}
-		
+		imFeelingLuckyButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int rand = (int) Math.random();
+				if (rand == 1) {
+					setVisible(false);
+					new GraphToMusic().setVisible(true);
+					dispose();
+				} else if (rand == 0) {
+					setVisible(false);
+					new MusicToGraph().setVisible(true);
+					dispose();
+				}
+			}
+		});
 		JLabel imageLabel = new JLabel("");
-		imageLabel.setIcon(new ImageIcon(new ImageIcon(Main.class.getResource("/logo.png")).getImage().getScaledInstance(250, 175, Image.SCALE_DEFAULT)));
+		imageLabel.setIcon(new ImageIcon(new ImageIcon(Main.class.getResource("/logo.png")).getImage()
+				.getScaledInstance(250, 175, Image.SCALE_DEFAULT)));
 		imageLabel.setBounds(159, 95, 281, 184);
 		contentPane.add(imageLabel);
 	}
