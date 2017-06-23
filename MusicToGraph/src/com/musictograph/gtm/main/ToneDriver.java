@@ -1,4 +1,4 @@
-package com.musictograph.main;
+package com.musictograph.gtm.main;
 
 import javax.sound.sampled.LineUnavailableException;
 
