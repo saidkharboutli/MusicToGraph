@@ -17,7 +17,7 @@ import java.awt.Toolkit;
 public class MusicToGraph extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
+	private JTextField filePathInput;
 
 	/**
 	 * Launch the application.
@@ -36,27 +36,27 @@ public class MusicToGraph extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		textField = new JTextField();
-		textField.setBounds(85, 54, 339, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		filePathInput = new JTextField();
+		filePathInput.setBounds(85, 54, 339, 20);
+		contentPane.add(filePathInput);
+		filePathInput.setColumns(10);
 		
-		JLabel lblFilePath = new JLabel("File Path:");
-		lblFilePath.setFont(new Font("DialogInput", Font.PLAIN, 12));
-		lblFilePath.setBounds(10, 53, 76, 20);
-		contentPane.add(lblFilePath);
+		JLabel filePathLabel = new JLabel("File Path:");
+		filePathLabel.setFont(new Font("DialogInput", Font.PLAIN, 12));
+		filePathLabel.setBounds(10, 53, 76, 20);
+		contentPane.add(filePathLabel);
 		
-		JButton btnLoad = new JButton("Load...");
-		btnLoad.setBounds(335, 85, 89, 23);
-		contentPane.add(btnLoad);
+		JButton loadButton = new JButton("Load...");
+		loadButton.setBounds(335, 85, 89, 23);
+		contentPane.add(loadButton);
 		
-		JTextPane txtpnThisWillConvert = new JTextPane();
-		txtpnThisWillConvert.setEditable(false);
-		txtpnThisWillConvert.setBackground(SystemColor.menu);
-		txtpnThisWillConvert.setFont(new Font("DialogInput", Font.PLAIN, 11));
-		txtpnThisWillConvert.setText("This will convert your audio files into a graph! Enter the file path below:");
-		txtpnThisWillConvert.setBounds(10, 5, 287, 38);
-		contentPane.add(txtpnThisWillConvert);
+		JTextPane mToGInfoPane = new JTextPane();
+		mToGInfoPane.setEditable(false);
+		mToGInfoPane.setBackground(SystemColor.menu);
+		mToGInfoPane.setFont(new Font("DialogInput", Font.PLAIN, 11));
+		mToGInfoPane.setText("This will convert your audio files into a graph! Enter the file path below:");
+		mToGInfoPane.setBounds(10, 5, 287, 38);
+		contentPane.add(mToGInfoPane);
 	}
 
 }
