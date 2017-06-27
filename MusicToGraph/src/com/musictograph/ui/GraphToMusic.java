@@ -7,14 +7,15 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import com.musictograph.gtm.Computable;
 import com.musictograph.gtm.Graph;
 import com.musictograph.gtm.audio.StdAudio;
 import com.musictograph.gtm.audio.Tone;
+import com.musictograph.gtm.evalex.Expression;
 
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.math.BigDecimal;
 
 import javax.swing.JTextPane;
 import java.awt.SystemColor;
@@ -22,14 +23,12 @@ import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JSlider;
 
 public class GraphToMusic extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField aInput;
-	private JTextField bInput;
-	private JTextField cInput;
-	private JTextField durationInput;
+	private JTextField expressionInput;
 
 	public GraphToMusic() {
 		setTitle("Music <-- Graph");
@@ -43,43 +42,19 @@ public class GraphToMusic extends JFrame {
 
 		JTextPane gToMInfoPane = new JTextPane();
 		gToMInfoPane.setEditable(false);
-		gToMInfoPane.setText(
-				"This will convert your function into an audio file! Enter the coeffecients below (include negatives):");
+		gToMInfoPane.setText("This will convert your expression into an audio file! Enter the expression below:");
 		gToMInfoPane.setFont(new Font("DialogInput", Font.PLAIN, 11));
 		gToMInfoPane.setBackground(SystemColor.menu);
 		gToMInfoPane.setBounds(10, 5, 381, 38);
 		contentPane.add(gToMInfoPane);
 
-		JLabel aLabel = new JLabel("x^2");
-		aLabel.setBounds(43, 54, 25, 20);
-		contentPane.add(aLabel);
-
-		aInput = new JTextField();
-		aInput.setBounds(10, 53, 31, 20);
-		contentPane.add(aInput);
-		aInput.setColumns(10);
-
-		JLabel firstPlusLabel = new JLabel("+");
-		firstPlusLabel.setBounds(69, 56, 16, 14);
-		contentPane.add(firstPlusLabel);
-
-		bInput = new JTextField();
-		bInput.setBounds(80, 53, 31, 20);
-		contentPane.add(bInput);
-		bInput.setColumns(10);
-
-		JLabel bLabel = new JLabel("x");
-		bLabel.setBounds(113, 57, 16, 14);
-		contentPane.add(bLabel);
-
-		JLabel secondPlusLabel = new JLabel("+");
-		secondPlusLabel.setBounds(122, 56, 16, 14);
-		contentPane.add(secondPlusLabel);
-
-		cInput = new JTextField();
-		cInput.setBounds(132, 54, 31, 20);
-		contentPane.add(cInput);
-		cInput.setColumns(10);
+		JSlider durationSlider = new JSlider();
+		durationSlider.setFont(new Font("DialogInput", Font.PLAIN, 11));
+		durationSlider.setValue(500);
+		durationSlider.setMaximum(1000);
+		durationSlider.setMinimum(1);
+		durationSlider.setBounds(190, 85, 142, 23);
+		contentPane.add(durationSlider);
 
 		JButton processButton = new JButton("Process");
 		processButton.setBounds(335, 85, 89, 23);
@@ -87,16 +62,15 @@ public class GraphToMusic extends JFrame {
 		processButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					double dub[] = new double[3];
-					dub[0] = Double.parseDouble(aInput.getText());
-					dub[1] = Double.parseDouble(bInput.getText());
-					dub[2] = Double.parseDouble(cInput.getText());
-					Graph graph = new Graph(new Computable(dub));
+					String expression = expressionInput.getText();
+					Graph graph = new Graph(expression);
 					graph.setVisible(true);
 					for (double x = -50; x <= 50; x += .25) {
-						if (new Computable(dub).compute(x) > 150 && new Computable(dub).compute(x) < 700) {
-							StdAudio.play(Tone.tone(new Computable(dub).compute(x),
-									Double.parseDouble(durationInput.getText())));
+						if (new Expression(expression).with("x", "" + x).eval().compareTo(new BigDecimal("150")) >= 1
+								&& new Expression(expression).with("x", "" + x).eval()
+										.compareTo(new BigDecimal(700)) <= 0) {
+							StdAudio.play(Tone.tone(new Expression(expression).with("x", "" + x).eval().doubleValue(),
+									durationSlider.getValue() / 1000.0));
 						}
 					}
 				} catch (Exception ex) {
@@ -109,14 +83,21 @@ public class GraphToMusic extends JFrame {
 		backButton.setBounds(10, 85, 89, 23);
 		contentPane.add(backButton);
 
-		JLabel durationLabel = new JLabel("Duration:");
-		durationLabel.setBounds(180, 89, 46, 14);
+		JLabel durationLabel = new JLabel("Duration(ms):");
+		durationLabel.setFont(new Font("DialogInput", Font.PLAIN, 11));
+		durationLabel.setBounds(100, 89, 97, 14);
 		contentPane.add(durationLabel);
 
-		durationInput = new JTextField();
-		durationInput.setBounds(236, 86, 86, 20);
-		contentPane.add(durationInput);
-		durationInput.setColumns(10);
+		JLabel expresssionLabel = new JLabel("Expression:");
+		expresssionLabel.setFont(new Font("DialogInput", Font.PLAIN, 11));
+		expresssionLabel.setBounds(10, 54, 79, 14);
+		contentPane.add(expresssionLabel);
+
+		expressionInput = new JTextField();
+		expressionInput.setBounds(90, 48, 334, 26);
+		contentPane.add(expressionInput);
+		expressionInput.setColumns(10);
+		
 		backButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new Main().setVisible(true);
@@ -124,5 +105,4 @@ public class GraphToMusic extends JFrame {
 			}
 		});
 	}
-
 }
