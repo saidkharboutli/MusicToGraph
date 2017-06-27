@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 
+@Deprecated
 public class Computable {
 	double coeffecients[];
 	double derivative[];
