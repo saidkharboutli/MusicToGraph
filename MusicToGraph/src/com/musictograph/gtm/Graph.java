@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 
 import com.musictograph.gtm.audio.StdAudio;
 import com.musictograph.gtm.audio.Tone;
+import com.musictograph.gtm.evalex.Expression;
 
 import de.erichseifert.gral.data.DataTable;
 import de.erichseifert.gral.plots.XYPlot;
@@ -14,17 +15,14 @@ import de.erichseifert.gral.ui.InteractivePanel;
 public class Graph extends JFrame {
 
 	private DataTable funcDataTable = new DataTable(Double.class, Double.class);
-	private Computable computable;
 	
-	public Graph(Computable aComputable) {
+	public Graph(String expression) {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(1200, 1200);
 		
-		computable = aComputable;
-		
-		for(double x = -50; x <= 50; x+=.15)
+		for(double x = -500; x <= 500; x+=.15)
 		{
-			funcDataTable.add(x, computable.compute(x));
+			funcDataTable.add(x, new Expression(expression).with("x", "" + x).eval().doubleValue());
 		}
 		
 		XYPlot plotFull = new XYPlot(funcDataTable);
