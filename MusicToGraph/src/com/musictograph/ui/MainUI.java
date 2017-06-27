@@ -23,7 +23,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Main extends JFrame {
+public class MainUI extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField byText;
@@ -35,7 +35,7 @@ public class Main extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Main frame = new Main();
+					MainUI frame = new MainUI();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -47,8 +47,8 @@ public class Main extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Main() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(Main.class.getResource("/logo.png")));
+	public MainUI() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(MainUI.class.getResource("/logo.png")));
 		setTitle("Music <-> Graph");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 390);
@@ -115,7 +115,7 @@ public class Main extends JFrame {
 			}
 		});
 		JLabel imageLabel = new JLabel("");
-		imageLabel.setIcon(new ImageIcon(new ImageIcon(Main.class.getResource("/logo.png")).getImage()
+		imageLabel.setIcon(new ImageIcon(new ImageIcon(MainUI.class.getResource("/logo.png")).getImage()
 				.getScaledInstance(250, 175, Image.SCALE_DEFAULT)));
 		imageLabel.setBounds(159, 95, 281, 184);
 		contentPane.add(imageLabel);

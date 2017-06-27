@@ -124,7 +124,7 @@ public class MusicToGraph extends JFrame {
 		contentPane.add(backButton);
 		backButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new Main().setVisible(true);
+				new MainUI().setVisible(true);
 				dispose();
 			}
 		});
