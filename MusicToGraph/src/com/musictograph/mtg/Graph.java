@@ -28,36 +28,24 @@ public class Graph extends JFrame {
 		for (int i = 0; i < Pitch.pitches.getItemCount(); i++) {
 			pitch[i] = Double.valueOf(Pitch.pitches.getItem(i));
 			time[i] = Double.valueOf(Pitch.time.getItem(i));
-			// time = time * 200;
-
 		}
+		
 		for (int w = 0; w < pitch.length; w++) {
 			dataFull.add(time[w], pitch[w]);
-			System.out.println("pitch: " + pitch[w] + " and " + time[w]);
 		}
 
-		int added = 0;
 		for (int i = 0; i < Pitch.pitches.getItemCount() / 8; i++) {
-
 			SimpleRegression Regression = new SimpleRegression();
 			double x = 0;
-
 			for (int s = 0; s < 8; s++) {
 				position++;
 				try {
 					Regression.addData(time[position], pitch[position]);
 					x = x + time[position];
-					added++;
-				} catch (Exception e) {
-					x = x;
-				}
+				} catch (Exception e) {/*silence...*/}
 			}
 			double average = x / 8;
 			data.add(average, Regression.predict(average));
-			// System.out.println("Predictedx: " + average + " Predictedy: " +
-			// Regression.predict(average));
-			// System.out.println(added);
-
 		}
 
 		XYPlot plot = new XYPlot(data);
