@@ -51,7 +51,7 @@ public class GraphToMusic extends JFrame {
 		JSlider durationSlider = new JSlider();
 		durationSlider.setFont(new Font("DialogInput", Font.PLAIN, 11));
 		durationSlider.setValue(500);
-		durationSlider.setMaximum(1000);
+		durationSlider.setMaximum(500);
 		durationSlider.setMinimum(1);
 		durationSlider.setBounds(190, 85, 142, 23);
 		contentPane.add(durationSlider);
