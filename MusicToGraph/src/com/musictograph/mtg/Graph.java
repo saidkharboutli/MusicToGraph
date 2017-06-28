@@ -1,19 +1,21 @@
 package com.musictograph.mtg;
 
-import java.awt.Color;
-
 import javax.swing.JFrame;
 import org.apache.commons.math3.stat.regression.SimpleRegression;
 
 import de.erichseifert.gral.data.DataTable;
 import de.erichseifert.gral.plots.XYPlot;
-import de.erichseifert.gral.plots.lines.AbstractLineRenderer2D;
 import de.erichseifert.gral.plots.lines.DefaultLineRenderer2D;
 import de.erichseifert.gral.plots.lines.LineRenderer;
 import de.erichseifert.gral.ui.InteractivePanel;
 
 public class Graph extends JFrame {
+	
+	private static final long serialVersionUID = 3L;
+	
+	@SuppressWarnings("unchecked")
 	DataTable data = new DataTable(Double.class, Double.class);
+	@SuppressWarnings("unchecked")
 	DataTable dataFull = new DataTable(Double.class, Double.class);
 	double[] pitch = new double[Pitch.pitches.getItemCount()];
 	double[] time = new double[Pitch.pitches.getItemCount()];
@@ -29,7 +31,7 @@ public class Graph extends JFrame {
 			pitch[i] = Double.valueOf(Pitch.pitches.getItem(i));
 			time[i] = Double.valueOf(Pitch.time.getItem(i));
 		}
-		
+
 		for (int w = 0; w < pitch.length; w++) {
 			dataFull.add(time[w], pitch[w]);
 		}
@@ -42,7 +44,8 @@ public class Graph extends JFrame {
 				try {
 					Regression.addData(time[position], pitch[position]);
 					x = x + time[position];
-				} catch (Exception e) {/*silence...*/}
+				} catch (Exception e) {
+					/* silence... */}
 			}
 			double average = x / 8;
 			data.add(average, Regression.predict(average));
@@ -59,10 +62,5 @@ public class Graph extends JFrame {
 			getContentPane().add(new InteractivePanel(plotFull));
 			plotFull.setLineRenderers(dataFull, lines);
 		}
-		Color color = new Color(0.0f, 0.3f, 1.0f);
-
-		// plot.getAxisRenderer(XYPlot.AXIS_X).setTickSpacing(5.0);
-		// plot.getAxisRenderer(XYPlot.AXIS_Y).setTickSpacing(100);
-
 	}
 }

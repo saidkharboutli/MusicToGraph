@@ -27,5 +27,5 @@ public class MyPitchDetector implements PitchDetectionHandler {
 			Pitch.time.add(addMe2);
 
 		}
-	} // TODO Auto-generated method stub
+	}
 }

@@ -1,8 +1,5 @@
 package com.musictograph.ui;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -35,6 +32,10 @@ import java.io.IOException;
 
 public class MusicToGraph extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 12L;
 	private JPanel contentPane;
 	private JTextField filePathInput;
 
@@ -83,7 +84,9 @@ public class MusicToGraph extends JFrame {
 						dispatcher.run();
 
 						int size = Pitch.time.getItemCount();
+						@SuppressWarnings("unused")
 						double[] time = new double[size];
+						@SuppressWarnings("unused")
 						float[] pitch = new float[Pitch.pitches.getItemCount()];
 
 						for (int i = 0; i < Pitch.pitches.getItemCount(); i++) {
