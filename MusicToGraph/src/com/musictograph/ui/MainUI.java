@@ -1,6 +1,5 @@
 package com.musictograph.ui;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -10,14 +9,10 @@ import javax.swing.JTextPane;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.SystemColor;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -25,6 +20,8 @@ import java.awt.event.ActionListener;
 
 public class MainUI extends JFrame {
 
+	private static final long serialVersionUID = 111L;
+	
 	private JPanel contentPane;
 	private JTextField byText;
 
