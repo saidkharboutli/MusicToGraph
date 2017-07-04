@@ -6,6 +6,7 @@ public class Tone {
 		double[] a = new double[n + 1];
 		for (int i = 0; i <= n; i++) {
 			a[i] = Math.sin(2 * Math.PI * i * hz / 44100);
+			System.out.println(a[i]);
 		}
 		return a;
 	}

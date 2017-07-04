@@ -4,11 +4,15 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import com.musictograph.gtm.Expressions;
 import com.musictograph.gtm.Graph;
+import com.musictograph.gtm.PointsMinMaxPair;
 import com.musictograph.gtm.audio.StdAudio;
 import com.musictograph.gtm.audio.Tone;
 
+import de.erichseifert.gral.data.DataTable;
 import net.objecthunter.exp4j.ExpressionBuilder;
+import net.objecthunter.exp4j.tokenizer.UnknownFunctionOrVariableException;
 
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -17,6 +21,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JTextPane;
 import java.awt.SystemColor;
 import java.awt.Font;
+import java.awt.geom.Point2D;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -26,10 +32,10 @@ import javax.swing.JSlider;
 public class GraphToMusic extends JFrame {
 
 	private static final long serialVersionUID = 11L;
-	
+
 	private JPanel contentPane;
 	private JTextField expressionInput;
-
+	
 	public GraphToMusic() {
 		setTitle("Music <-- Graph");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(GraphToMusic.class.getResource("/logo.png")));
@@ -50,8 +56,8 @@ public class GraphToMusic extends JFrame {
 
 		JSlider durationSlider = new JSlider();
 		durationSlider.setFont(new Font("DialogInput", Font.PLAIN, 11));
-		durationSlider.setValue(500);
-		durationSlider.setMaximum(500);
+		durationSlider.setValue(125);
+		durationSlider.setMaximum(250);
 		durationSlider.setMinimum(1);
 		durationSlider.setBounds(190, 85, 142, 23);
 		contentPane.add(durationSlider);
@@ -61,26 +67,21 @@ public class GraphToMusic extends JFrame {
 		contentPane.add(processButton);
 		processButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-					String expression = expressionInput.getText();
-					Graph graph = new Graph(expression);
-					graph.setVisible(true);
-					for (double x = -50; x <= 50; x += .05) {
-						try {
-							if (new ExpressionBuilder(expression).variables("x").build().setVariable("x", x).evaluate() >= 150
-									&& new ExpressionBuilder(expression).variables("x").build().setVariable("x", x).evaluate() <= 750) {
-								StdAudio.play(
-										Tone.tone(new ExpressionBuilder(expression).variables("x").build().setVariable("x", x).evaluate(),
-												durationSlider.getValue() / 1000.0));
-							}
-						} catch (ArithmeticException arithEx) {
-						}
-					}
-				} catch (Exception ex) {
-					ex.printStackTrace();
-					Object[] options = { "OK" };
-					JOptionPane.showOptionDialog(null, "BAD INPUT!", "Bad Input", JOptionPane.PLAIN_MESSAGE,
-							JOptionPane.ERROR_MESSAGE, null, options, options[0]);
+				DataTable funcDataTable = new DataTable(Double.class, Double.class);
+				Graph graph = new Graph(funcDataTable);
+				graph.setVisible(true);
+				
+				PointsMinMaxPair pair = Expressions.producePoints(-15, 15, expressionInput.getText());
+				
+				double[] minMax = pair.getMinMax();
+				Point2D.Double[] points = pair.getPoints();
+				
+				for(int c = 0; c < points.length; c++)
+				{
+					graph.addPoint(points[c].getX(), points[c].getY());
+					double[] sample = Tone.tone(Expressions.scale(points[c].getY(), minMax[0], minMax[1], 250, 750), durationSlider.getValue() / 1000.0);
+					StdAudio.play(sample);
+					System.out.println();
 				}
 			}
 		});
