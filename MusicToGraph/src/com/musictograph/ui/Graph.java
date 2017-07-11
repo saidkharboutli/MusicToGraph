@@ -9,10 +9,10 @@ import de.erichseifert.gral.plots.lines.LineRenderer;
 import de.erichseifert.gral.ui.InteractivePanel;
 
 public class Graph extends JFrame {
-	
+
 	private DataTable myFuncDataTable;
 	private InteractivePanel panel;
-	
+
 	public Graph(DataTable funcDataTable) {
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setTitle("Graph...");

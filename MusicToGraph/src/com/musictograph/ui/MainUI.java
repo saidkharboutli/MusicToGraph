@@ -21,7 +21,7 @@ import java.awt.event.ActionListener;
 public class MainUI extends JFrame {
 
 	private static final long serialVersionUID = 111L;
-	
+
 	private JPanel contentPane;
 	private JTextField byText;
 

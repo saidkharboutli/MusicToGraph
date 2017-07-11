@@ -40,7 +40,7 @@ public class GraphToMusic extends JFrame {
 	private JTextField expressionInput;
 	private JTextField xMinInput;
 	private JTextField xMaxInput;
-	
+
 	public GraphToMusic() {
 		setTitle("Music <-- Graph");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(GraphToMusic.class.getResource("/logo.png")));
@@ -74,26 +74,23 @@ public class GraphToMusic extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				DataTable funcDataTable = new DataTable(Double.class, Double.class);
 				int xMin, xMax;
-				if(xMinInput.getText().equals(""))
-				{
+				if (xMinInput.getText().equals("")) {
 					xMin = -15;
 				} else {
 					xMin = Integer.parseInt(xMinInput.getText());
 				}
-				
-				if(xMaxInput.getText().equals("")) {
+
+				if (xMaxInput.getText().equals("")) {
 					xMax = 15;
-				}
-				else {
+				} else {
 					xMax = Integer.parseInt(xMaxInput.getText());
 				}
 				PointsMinMaxPair pair = Expressions.producePoints(xMin, xMax, expressionInput.getText());
-				
+
 				double[] minMax = pair.getMinMax();
 				Point2D.Double[] points = pair.getPoints();
-				
-				for(int c = 0; c < points.length; c++)
-				{
+
+				for (int c = 0; c < points.length; c++) {
 					funcDataTable.add(points[c].getX(), points[c].getY());
 					double val = Expressions.scale(points[c].getY(), minMax[0], minMax[1], 300, 650);
 					double[] sample = Tone.tone(val, durationSlider.getValue() / 1000.0);
@@ -122,21 +119,21 @@ public class GraphToMusic extends JFrame {
 		expressionInput.setBounds(90, 48, 334, 26);
 		contentPane.add(expressionInput);
 		expressionInput.setColumns(10);
-		
+
 		xMinInput = new JTextField();
 		xMinInput.setBounds(103, 79, 57, 20);
 		contentPane.add(xMinInput);
 		xMinInput.setColumns(10);
-		
+
 		xMaxInput = new JTextField();
 		xMaxInput.setBounds(268, 79, 57, 20);
 		contentPane.add(xMaxInput);
 		xMaxInput.setColumns(10);
-		
+
 		JLabel xMinLabel = new JLabel("Graph x-min:");
 		xMinLabel.setBounds(30, 82, 63, 14);
 		contentPane.add(xMinLabel);
-		
+
 		JLabel xMaxLabel = new JLabel("Graph x-max:");
 		xMaxLabel.setBounds(194, 82, 79, 14);
 		contentPane.add(xMaxLabel);

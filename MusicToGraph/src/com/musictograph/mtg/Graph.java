@@ -10,9 +10,9 @@ import de.erichseifert.gral.plots.lines.LineRenderer;
 import de.erichseifert.gral.ui.InteractivePanel;
 
 public class Graph extends JFrame {
-	
+
 	private static final long serialVersionUID = 3L;
-	
+
 	@SuppressWarnings("unchecked")
 	DataTable data = new DataTable(Double.class, Double.class);
 	@SuppressWarnings("unchecked")
