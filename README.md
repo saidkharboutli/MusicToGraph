@@ -11,12 +11,10 @@ As of now, only the deskop app is available. You can download that from the rele
 
 # Plans
 Here is a list of features I'd like to implement down the line:
-- Expand feature set of Music --> Graph including:
   1) sigma function
   2) effective default graph zoom/focus
   3) better audio exprience (a bug exists in the Java sound library)
   4) build a more attractive UI
-  5) allow for audio playback in Graph --> Music
   6) create a follow along feature, showing what the pars of the graph sound like
 
 # Credits
