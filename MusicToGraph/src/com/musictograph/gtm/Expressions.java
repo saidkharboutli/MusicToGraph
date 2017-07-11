@@ -10,12 +10,12 @@ import net.objecthunter.exp4j.ExpressionBuilder;
 public class Expressions {
 	
 	public static PointsMinMaxPair producePoints(double xMin, double xMax, String expression) {
-		java.awt.geom.Point2D.Double[] points = new Point2D.Double[Math.abs((int) ((xMax - xMin + 1) / .01))];
+		java.awt.geom.Point2D.Double[] points = new Point2D.Double[Math.abs((int) ((xMax - xMin) / .1) + 1)];
 		double min = Double.NaN, max = Double.NaN;
 		
 		Expression builtExpression = new ExpressionBuilder(expression).variables("x").build();
 		
-		for (double x = xMin, c = 0; x <= xMax; x += .01, c++) {
+		for (double x = xMin, c = 0; x <= xMax; x += .1, c++) {
 			try {
 				double val = builtExpression.setVariable("x", x).evaluate();
 				points[(int) c] = new Point2D.Double(x, val);
