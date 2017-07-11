@@ -2,7 +2,7 @@
 Music to Graph is an application that allows you to do two things:
   1) Input a .wav file and view the audio data contained within in a graph format (Graph --> Music)
   
-  -- and --
+    -- and --
   
   2) Input a algebraic expression and generate the graph of that expression, as well as an audible format of the function (Music --> Graph)
 
