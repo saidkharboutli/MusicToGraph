@@ -6,7 +6,7 @@ Music to Graph is an application that allows you to do two things:
   
   2) Input a algebraic expression and generate the graph of that expression, as well as an audible format of the function (Music --> Graph)
 
-# Usage
+# Download & Usage
 As of now, only the deskop app is available. You can download that from the release folder inside the main MusicToGraph folder, or use the link [here](https://github.com/Scoutdrago3/MusicToGraph/raw/master/MusicToGraph/release/music-to-graph-v1.0.jar). This application requires Java to be installed on your computer, and will run on Windows, Mac, and Linux.
 
 # Plans
